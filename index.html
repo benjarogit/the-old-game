@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="title">Conways Spiel des Lebens</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <nav class="lang-nav" aria-label="Language / Sprache">
+        <button type="button" id="lang-de" aria-label="Deutsch">DE</button>
+        <span class="lang-sep">|</span>
+        <button type="button" id="lang-en" aria-label="English">EN</button>
+      </nav>
+      <h1 data-i18n="heading">Spiel des Lebens</h1>
+      <p class="subtitle" data-i18n="subtitle">John Conways zellulärer Automat · 1970</p>
+    </header>
+
+    <main>
+      <div class="canvas-wrap">
+        <canvas id="grid" width="800" height="600"></canvas>
+      </div>
+
+      <aside class="controls">
+        <div class="control-row">
+          <button type="button" id="btn-run" aria-label="Start" data-i18n-run>▶ Start</button>
+          <button type="button" id="btn-step" aria-label="Ein Schritt" data-i18n="btnStep">⏭ Schritt</button>
+          <button type="button" id="btn-clear" aria-label="Löschen" data-i18n="btnClear">🗑 Löschen</button>
+        </div>
+        <div class="control-row">
+          <label>
+            <span data-i18n="speed">Geschwindigkeit</span>
+            <input type="range" id="speed" min="1" max="30" value="8">
+          </label>
+        </div>
+        <fieldset class="presets">
+          <legend data-i18n="presets">Presets</legend>
+          <p class="preset-hint" data-i18n="presetHint">Tasten 1–7: Presets (wie Desktop). Leertaste: ein Schritt, wenn pausiert.</p>
+          <p class="preset-hint preset-rules" data-i18n="rulesHint">Still Lifes (z. B. Block) bewegen sich nicht. Viele Muster werden mit der Zeit stabil oder erlöschen – das gehört zu den Regeln.</p>
+          <section class="how-to" aria-label="So funktioniert es">
+            <p class="how-to-line how-to-rules" data-i18n="rulesShort"></p>
+            <p class="how-to-line" data-i18n="presetAddHint"></p>
+            <p class="how-to-line" data-i18n="howToStart"></p>
+            <p class="how-to-line" data-i18n="howToStep"></p>
+            <p class="how-to-line" data-i18n="wrapHint"></p>
+            <p class="how-to-line" data-i18n="startWithPatterns"></p>
+            <p class="how-to-line" data-i18n="mouseHint"></p>
+          </section>
+          <span class="preset-cat" data-i18n="catStill">Still Lives</span>
+          <button type="button" data-preset="block" data-i18n="presetBlock">Block</button>
+          <span class="preset-cat" data-i18n="catOsc">Oscillators</span>
+          <button type="button" data-preset="blinker" data-i18n="presetBlinker">Blinker</button>
+          <button type="button" data-preset="beacon" data-i18n="presetBeacon">Beacon</button>
+          <button type="button" data-preset="toad" data-i18n="presetToad">Toad</button>
+          <button type="button" data-preset="pulsar" data-i18n="presetPulsar">Pulsar</button>
+          <span class="preset-cat" data-i18n="catShip">Spaceships</span>
+          <button type="button" data-preset="glider" data-i18n="presetGlider">Glider</button>
+          <button type="button" data-preset="lwss" data-i18n="presetLwss">LWSS</button>
+          <span class="preset-cat" data-i18n="catOther">Sonst</span>
+          <button type="button" data-preset="random" data-i18n="presetRandom">Zufall</button>
+        </fieldset>
+        <p class="generation"><span data-i18n="genLabel">Generation:</span> <strong id="gen">0</strong></p>
+      </aside>
+    </main>
+
+    <footer>
+      <p data-i18n="footerHint">Klicke oder ziehe auf dem Feld, um Zellen zu setzen. Läuft auf allen Geräten im Browser.</p>
+      <p>© 2025–2026 Sunny C. · <a href="https://github.com/benjarogit/the-old-game">GitHub</a></p>
+    </footer>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
