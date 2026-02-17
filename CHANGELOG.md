@@ -6,6 +6,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [1.2.6] - 2026-02-17
+
+### Geändert
+- Release-Workflow: deploy-pages mit Environment und Job-Permissions für GitHub Pages
+
 ## [1.2.5] - 2026-02-17
 
 ### Behoben
