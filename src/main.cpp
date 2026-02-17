@@ -5,9 +5,12 @@
  */
 
 #if defined(_WIN32) || defined(_WIN64)
+#define WIN32_LEAN_AND_MEAN
+#define NOGDI
 #include <windows.h>
 #undef CloseWindow
 #undef ShowCursor
+#undef Rectangle
 #endif
 
 #include "raylib.h"
