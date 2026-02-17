@@ -10,6 +10,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ### Behoben
 - Windows-Build: extern \"C\"-Deklaration in globalen Bereich verschoben (MSVC: linkage specification must be at global scope)
+- Windows-Build: WinMain-Einstieg in winmain_win.cpp (LNK2019 behoben, GUI ohne Konsole)
 
 ## [1.2.3] - 2026-02-17
 

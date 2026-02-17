@@ -30,7 +30,11 @@ FetchContent_Populate(raygui)
 set(RAYGUI_SRC_DIR ${raygui_SOURCE_DIR}/src)
 message(STATUS "raygui source: ${RAYGUI_SRC_DIR}")
 
-add_executable(spiel-des-lebens src/main.cpp)
+set(SOURCES src/main.cpp)
+if(WIN32)
+  list(APPEND SOURCES src/winmain_win.cpp)
+endif()
+add_executable(spiel-des-lebens ${SOURCES})
 target_include_directories(spiel-des-lebens PRIVATE ${RAYGUI_SRC_DIR})
 target_link_libraries(spiel-des-lebens PRIVATE raylib)
 
