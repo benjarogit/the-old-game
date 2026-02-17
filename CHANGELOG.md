@@ -6,6 +6,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [1.2.4] - 2026-02-17
+
+### Behoben
+- Windows-Build: extern \"C\"-Deklaration in globalen Bereich verschoben (MSVC: linkage specification must be at global scope)
+
 ## [1.2.3] - 2026-02-17
 
 ### Behoben
