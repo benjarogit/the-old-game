@@ -4,6 +4,12 @@
  * Sidebar: raygui for cross-platform, consistent GUI.
  */
 
+#if defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+#undef CloseWindow
+#undef ShowCursor
+#endif
+
 #include "raylib.h"
 #include <cstdlib>
 // raygui ruft TextToFloat auf, definiert es aber nur bei RAYGUI_STANDALONE – bei Nutzung mit raylib selbst bereitstellen
@@ -16,10 +22,6 @@ static float TextToFloat(const char *text) {
 #include <ctime>
 #include <cstring>
 #include <cstdio>
-
-#if defined(_WIN32) || defined(_WIN64)
-#include <windows.h>
-#endif
 
 const int CELL_SIZE = 8;
 const int WIDTH = 800;
@@ -287,7 +289,7 @@ int main() {
     }
 
     BeginDrawing();
-    ClearBackground((Color){ 0x1a, 0x1a, 0x20, 255 });
+    ClearBackground(Color{ 0x1a, 0x1a, 0x20, 255 });
     drawGrid(scale, offsetX, offsetY, contentW, contentH);
     Rectangle sidebarRect = { (float)contentW, 0, (float)SIDEBAR_W, (float)winH };
     GuiPanel(sidebarRect, NULL);
@@ -301,16 +303,16 @@ int main() {
 
     /* Steuerung: Gen, Start/Pause, Schritt, Loeschen */
     const float ctrlH = 22.f + lineH + gap + btnH + 12.f;
-    GuiGroupBox((Rectangle){ sx, y, w, ctrlH }, GRP_CTRL[useGerman]);
+    GuiGroupBox(Rectangle{ sx, y, w, ctrlH }, GRP_CTRL[useGerman]);
     y += 20.f;
-    GuiLabel((Rectangle){ sx, y, w * 0.55f, lineH }, TextFormat("Gen: %d", generation));
+    GuiLabel(Rectangle{ sx, y, w * 0.55f, lineH }, TextFormat("Gen: %d", generation));
     y += lineH + gap;
     float bw = (w - 2.f * gap) / 3.f;
-    if (GuiButton((Rectangle){ sx, y, bw, btnH }, running ? BTN_PAUSE[useGerman] : BTN_START[useGerman]))
+    if (GuiButton(Rectangle{ sx, y, bw, btnH }, running ? BTN_PAUSE[useGerman] : BTN_START[useGerman]))
       running = !running;
-    if (GuiButton((Rectangle){ sx + bw + gap, y, bw, btnH }, BTN_STEP[useGerman]) && !running)
+    if (GuiButton(Rectangle{ sx + bw + gap, y, bw, btnH }, BTN_STEP[useGerman]) && !running)
       step();
-    if (GuiButton((Rectangle){ sx + 2.f * (bw + gap), y, bw, btnH }, BTN_CLEAR[useGerman])) {
+    if (GuiButton(Rectangle{ sx + 2.f * (bw + gap), y, bw, btnH }, BTN_CLEAR[useGerman])) {
       clearGrid();
       running = false;
     }
@@ -319,38 +321,38 @@ int main() {
     /* Presets: 7 Buttons, einheitliche Hoehe */
     const float presetBtnH = 24.f;
     const float presetsH = 20.f + 7.f * (presetBtnH + 4.f) + 6.f;
-    GuiGroupBox((Rectangle){ sx, y, w, presetsH }, GRP_PRESETS[useGerman]);
+    GuiGroupBox(Rectangle{ sx, y, w, presetsH }, GRP_PRESETS[useGerman]);
     y += 20.f;
     const float pw = w;
-    if (GuiButton((Rectangle){ sx, y, pw, presetBtnH }, P_BLOCK[useGerman]))  applyPreset(1);
+    if (GuiButton(Rectangle{ sx, y, pw, presetBtnH }, P_BLOCK[useGerman]))  applyPreset(1);
     y += presetBtnH + 4.f;
-    if (GuiButton((Rectangle){ sx, y, pw, presetBtnH }, P_BLINKER[useGerman])) applyPreset(2);
+    if (GuiButton(Rectangle{ sx, y, pw, presetBtnH }, P_BLINKER[useGerman])) applyPreset(2);
     y += presetBtnH + 4.f;
-    if (GuiButton((Rectangle){ sx, y, pw, presetBtnH }, P_BEACON[useGerman]))  applyPreset(3);
+    if (GuiButton(Rectangle{ sx, y, pw, presetBtnH }, P_BEACON[useGerman]))  applyPreset(3);
     y += presetBtnH + 4.f;
-    if (GuiButton((Rectangle){ sx, y, pw, presetBtnH }, P_TOAD[useGerman]))    applyPreset(4);
+    if (GuiButton(Rectangle{ sx, y, pw, presetBtnH }, P_TOAD[useGerman]))    applyPreset(4);
     y += presetBtnH + 4.f;
-    if (GuiButton((Rectangle){ sx, y, pw, presetBtnH }, P_PULSAR[useGerman]))  applyPreset(5);
+    if (GuiButton(Rectangle{ sx, y, pw, presetBtnH }, P_PULSAR[useGerman]))  applyPreset(5);
     y += presetBtnH + 4.f;
-    if (GuiButton((Rectangle){ sx, y, pw, presetBtnH }, P_GLIDER[useGerman])) applyPreset(6);
+    if (GuiButton(Rectangle{ sx, y, pw, presetBtnH }, P_GLIDER[useGerman])) applyPreset(6);
     y += presetBtnH + 4.f;
-    if (GuiButton((Rectangle){ sx, y, pw, presetBtnH }, P_LWSS[useGerman]))   applyPreset(7);
+    if (GuiButton(Rectangle{ sx, y, pw, presetBtnH }, P_LWSS[useGerman]))   applyPreset(7);
     y += presetBtnH + 10.f;
 
     /* Info-Button: oeffnet Erklaerung */
-    if (GuiButton((Rectangle){ sx, y, w, btnH }, BTN_INFO[useGerman]))
+    if (GuiButton(Rectangle{ sx, y, w, btnH }, BTN_INFO[useGerman]))
       showInfoDialog = true;
     y += btnH + 8.f;
 
-    GuiLabel((Rectangle){ sx, y, w, lineH }, RULES_INTRO[useGerman]);
+    GuiLabel(Rectangle{ sx, y, w, lineH }, RULES_INTRO[useGerman]);
     y += lineH;
-    GuiLabel((Rectangle){ sx, y, w, lineH }, TextFormat("%s  |  %s  |  1-7  |  %s", SPACE_STEP[useGerman], C_CLEAR[useGerman], L_HINT[useGerman]));
+    GuiLabel(Rectangle{ sx, y, w, lineH }, TextFormat("%s  |  %s  |  1-7  |  %s", SPACE_STEP[useGerman], C_CLEAR[useGerman], L_HINT[useGerman]));
     y += lineH;
-    GuiLabel((Rectangle){ sx, y, w, lineH * 1.1f }, CLICK_CELLS[useGerman]);
+    GuiLabel(Rectangle{ sx, y, w, lineH * 1.1f }, CLICK_CELLS[useGerman]);
     y += lineH + 2.f;
-    GuiLabel((Rectangle){ sx, y, w, lineH * 1.1f }, RIGHT_MOUSE[useGerman]);
+    GuiLabel(Rectangle{ sx, y, w, lineH * 1.1f }, RIGHT_MOUSE[useGerman]);
     y += lineH + 8.f;
-    GuiLabel((Rectangle){ sx, y, w, 18.f }, COPYRIGHT[useGerman]);
+    GuiLabel(Rectangle{ sx, y, w, 18.f }, COPYRIGHT[useGerman]);
 
     /* Modal Info-Dialog */
     if (showInfoDialog) {
@@ -359,7 +361,7 @@ int main() {
         "%s\n\n%s\n\n%s\n\n%s\n\n%s\n%s",
         STEP_DESC[useGerman], WRAP_DESC[useGerman], START_DESC[useGerman],
         RULES_HINT[useGerman], CLICK_CELLS[useGerman], RIGHT_MOUSE[useGerman]);
-      Rectangle msgRect = { winW / 2.f - 190.f, winH / 2.f - 140.f, 380.f, 280.f };
+      Rectangle msgRect{ winW / 2.f - 190.f, winH / 2.f - 140.f, 380.f, 280.f };
       int r = GuiMessageBox(msgRect, INFO_TITLE[useGerman], infoBuf, "OK");
       if (r == 0) showInfoDialog = false;
     }

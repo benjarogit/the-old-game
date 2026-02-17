@@ -6,6 +6,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-02-17
+
+### Behoben
+- Windows-Build: Konflikt mit Windows-API (CloseWindow, ShowCursor) durch #undef vor raylib behoben
+- Windows-Build: MSVC C++-Syntax (Color{ }, Rectangle{ } statt C-Compound-Literale) für Release-Workflow
+
 ## [1.2.0] - 2026-02-17
 
 ### Hinzugefügt
