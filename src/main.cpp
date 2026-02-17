@@ -17,6 +17,11 @@ static float TextToFloat(const char *text) {
 #include <cstring>
 #include <cstdio>
 
+#if defined(_WIN32) || defined(_WIN64)
+/* Ohne windows.h (Konflikt mit raylib). Nur Spracherkennung. */
+extern "C" __declspec(dllimport) unsigned short __stdcall GetUserDefaultUILanguage(void);
+#endif
+
 const int CELL_SIZE = 8;
 const int WIDTH = 800;
 const int HEIGHT = 600;
@@ -167,8 +172,6 @@ static const char* const GRP_PRESETS[] = { "Presets", "Presets" };
 /** Detect OS UI language: 1 = German, 0 = English. Windows: GetUserDefaultUILanguage; Unix: LANG/LC_ALL. */
 static int detectOsLanguage() {
 #if defined(_WIN32) || defined(_WIN64)
-  /* Explizit deklariert, damit windows.h nicht vor raylib inkludiert wird (Konflikt CloseWindow, ShowCursor, Rectangle, …). */
-  extern "C" __declspec(dllimport) unsigned short __stdcall GetUserDefaultUILanguage(void);
   unsigned short langId = GetUserDefaultUILanguage();
   return ((langId & 0x3FFu) == 0x07u) ? 1 : 0;  /* PRIMARYLANGID, LANG_GERMAN */
 #else
