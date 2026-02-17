@@ -6,6 +6,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [1.2.5] - 2026-02-17
+
+### Behoben
+- Windows-Build: WinMain in winmain_win.cpp (LNK2019, GUI ohne Konsole)
+
 ## [1.2.4] - 2026-02-17
 
 ### Behoben
