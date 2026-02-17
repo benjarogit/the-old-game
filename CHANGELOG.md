@@ -6,6 +6,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [1.2.2] - 2026-02-17
+
+### Behoben
+- Windows-Build: Rectangle-Konflikt mit wingdi.h (WIN32_LEAN_AND_MEAN, NOGDI, #undef Rectangle)
+
 ## [1.2.1] - 2026-02-17
 
 ### Behoben
