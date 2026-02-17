@@ -4,15 +4,6 @@
  * Sidebar: raygui for cross-platform, consistent GUI.
  */
 
-#if defined(_WIN32) || defined(_WIN64)
-#define WIN32_LEAN_AND_MEAN
-#define NOGDI
-#include <windows.h>
-#undef CloseWindow
-#undef ShowCursor
-#undef Rectangle
-#endif
-
 #include "raylib.h"
 #include <cstdlib>
 // raygui ruft TextToFloat auf, definiert es aber nur bei RAYGUI_STANDALONE – bei Nutzung mit raylib selbst bereitstellen
@@ -176,8 +167,10 @@ static const char* const GRP_PRESETS[] = { "Presets", "Presets" };
 /** Detect OS UI language: 1 = German, 0 = English. Windows: GetUserDefaultUILanguage; Unix: LANG/LC_ALL. */
 static int detectOsLanguage() {
 #if defined(_WIN32) || defined(_WIN64)
-  LANGID langId = GetUserDefaultUILanguage();
-  return (PRIMARYLANGID(langId) == LANG_GERMAN) ? 1 : 0;
+  /* Explizit deklariert, damit windows.h nicht vor raylib inkludiert wird (Konflikt CloseWindow, ShowCursor, Rectangle, …). */
+  extern "C" __declspec(dllimport) unsigned short __stdcall GetUserDefaultUILanguage(void);
+  unsigned short langId = GetUserDefaultUILanguage();
+  return ((langId & 0x3FFu) == 0x07u) ? 1 : 0;  /* PRIMARYLANGID, LANG_GERMAN */
 #else
   const char* langEnv = getenv("LC_ALL");
   if (!langEnv || !langEnv[0]) langEnv = getenv("LANG");

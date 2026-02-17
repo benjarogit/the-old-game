@@ -6,6 +6,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ## [Unreleased]
 
+## [1.2.3] - 2026-02-17
+
+### Behoben
+- Windows-Build: Kein windows.h mehr in main.cpp – GetUserDefaultUILanguage explizit deklariert, Konflikte mit CloseWindow/ShowCursor/LoadImageA/DrawTextA behoben
+
 ## [1.2.2] - 2026-02-17
 
 ### Behoben
